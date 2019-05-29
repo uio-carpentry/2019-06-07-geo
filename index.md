@@ -232,37 +232,6 @@ e.g., '2015-06-10-esu'.
 <hr/>
 
 {% comment %}
-SYLLABUS
-
-Show what topics will be covered.
-
-1. If your workshop is R rather than Python, remove the comment
-around that section and put a comment around the Python section.
-2. Some workshops will delete SQL.
-3. Please make sure the list of topics is synchronized with what you
-intend to teach.
-4. You may need to move the div's with class="col-md-6" around inside
-the div's with class="row" to balance the multi-column layout.
-
-This is one of the places where people frequently make mistakes, so
-please preview your site before committing, and make sure to run
-'tools/check' as well.
-{% endcomment %}
-<h2 id="syllabus">Syllabus</h2>
-
-{% if page.carpentry == "swc" %}
-{% include sc/syllabus.html %}
-{% elsif page.carpentry == "uio" %}
-{% include uio/syllabus.html %}
-{% elsif page.carpentry == "dc" %}
-{% include dc/syllabus.html %}
-{% elsif page.carpentry == "lc" %}
-{% include lc/syllabus.html %}
-{% endif %}
-
-<hr/>
-
-{% comment %}
 SETUP
 
 Delete irrelevant sections from the setup instructions.  Each
@@ -276,21 +245,36 @@ please preview your site before committing, and make sure to run
 
 <h2 id="setup">Setup</h2>
 
-<p>
-  To participate in a
-  {% if page.carpentry == "swc" %}
-  Software Carpentry
-  {% elsif page.carpentry == "dc" %}
-  Data Carpentry
-  {% elsif page.carpentry == "uio" %}
-  Carpentry@UiO
-  {% elsif page.carpentry == "lc" %}
-  Library Carpentry
-  {% endif %}
-  workshop,
-  you will need access to the software described below.
-  In addition, you will need an up-to-date web browser.
-</p>
+### Register to Copernicus Climate Data Store
+
+We will be using the Copernicus Climate Data Store and its Python and R API so it is important to register before the workshop.
+
+- Create an [account](https://cds.climate.copernicus.eu/user/login?destination=%2F%23!%2Fhome)
+
+### Copernicus online learning environment (Optional)
+
+We will be using additional training material from the Copernicus online learning environment
+and if you would like to consult the materials yourself, 
+register [here](https://uls.climate.copernicus.eu/login).
+
+### Install packages
+
+#### Basic setup
+
+- [The Bash Shell](#shell)
+- [Git](#git)
+- [Text editor](#editor)
+- [Anaconda Package Manager](#anaconda) 
+
+#### Python
+- [Python installation](#python) 
+- [Installation of additional python packages](#python-packages) 
+
+#### R 
+- [R installation](#r) 
+- [Installation of additional R libraries](#r-libraries) 
+
+
 <p>
   We maintain a list of common issues that occur during installation as a reference for instructors
   that may be useful on the
@@ -521,16 +505,19 @@ please preview your site before committing, and make sure to run
   </div>
 </div> {% comment %} End of 'editor' section. {% endcomment %}
 
-<div id="python"> {% comment %} Start of 'Python' section. Remove the third paragraph if
+<div id="anaconda"> {% comment %} Start of 'Python' section. Remove the third paragraph if
   the workshop will teach Python using something other than
   the Jupyter notebook.
   Details at https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#browser-compatibility {% endcomment %}
-  <h3>Python</h3>
+  <h3>Anaconda Package Manager</h3>
 
+  
   <p>
-    <a href="https://python.org">Python</a> is a popular language for
+    Installing <a href="https://www.anaconda.com/distribution/">Anaconda</a> will allow  
+    give you to easily install <a href="https://python.org">Python</a> and <a href="https://www.r-project.org/">R</a>.
+	Both Python and R are popular languages for
     research computing, and great for general-purpose programming as
-    well.  Installing all of its research packages individually can be
+    well.  Installing additional research packages individually can be
     a bit difficult, so we recommend
     <a href="https://www.anaconda.com/distribution/">Anaconda</a>,
     an all-in-one installer.
@@ -540,16 +527,6 @@ please preview your site before committing, and make sure to run
     Regardless of how you choose to install it,
     <strong>please make sure you install Python version 3.x</strong>
     (e.g., 3.6 is fine).
-  </p>
-
-  <p>
-    We will teach Python using the <a href="https://jupyter.org/">Jupyter notebook</a>,
-    a programming environment that runs in a web browser. For this to work you will need a reasonably
-    up-to-date browser. The current versions of the Chrome, Safari and
-    Firefox browsers are all
-    <a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#browser-compatibility">supported</a>
-    (some older browsers, including Internet Explorer version 9
-    and below, are not).
   </p>
 
   <div>
@@ -619,6 +596,68 @@ please preview your site before committing, and make sure to run
   {% endcomment %}
 </div> {% comment %} End of 'Python' section. {% endcomment %}
 
+<div id="python"> 
+<h3>Python</h3>
+<p>
+If you have followed the previous section and installed <a href="#anaconda">Anaconda</a> then
+you are ready to go with Python.
+</p>
+<p>
+    We will teach Python using the <a href="https://jupyter.org/">Jupyter notebook</a>,
+    a programming environment that runs in a web browser. For this to work you will need a reasonably
+    up-to-date browser. The current versions of the Chrome, Safari and
+    Firefox browsers are all
+    <a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#browser-compatibility">supported</a>
+    (some older browsers, including Internet Explorer version 9
+    and below, are not).
+  </p>
+
+</div>
+<div id="python-packages"> 
+
+<h3>Install additional Python packages</h3>
+
+To install additional Python packages/libraries, you need to follow the instructions below.
+
+  <div>
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li role="presentation" class="active"><a data-os="windows" href="#python-packages-windows" aria-controls="Windows" role="tab" data-toggle="tab">Windows</a></li>
+      <li role="presentation"><a data-os="macos" href="#python-packages-macos" aria-controls="MacOS" role="tab" data-toggle="tab">MacOS</a></li>
+      <li role="presentation"><a data-os="linux" href="#python-packages-linux" aria-controls="Linux" role="tab" data-toggle="tab">Linux</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <article role="tabpanel" class="tab-pane active" id="python-packages-windows">
+        <ol>
+		  <li>Download <a href="environment.yml" download="environment.yml">environment.yml</a></li>
+          <li><a href="https://docs.anaconda.com/anaconda/navigator/getting-started/">Open Anaconda navigator</a>.</li>
+           <li>Click the Environments tab in the left menu. Then click Import and select the environment.yml file you downloaded. 
+		  <img src="fig/navigator-import-environment.png" alt="Import environment">
+		  </li>
+        </ol>
+      </article>
+      <article role="tabpanel" class="tab-pane active" id="python-packages-macos">
+        <ol>
+          <li>Open a terminal</li>
+          <li>Download <a href="environment.yml" download="environment.yml">environment.yml</a></li>
+          <li>Install environment.yml: <pre>conda env create -f environment.yml</pre></li>
+          <li>Close the terminal window.</li>
+		</ol>
+      </article>
+      <article role="tabpanel" class="tab-pane active" id="python-packages-linux">
+        <ol>
+          <li>Open a terminal</li>
+          <li>Download <a href="environment.yml">environment.yml</a></li>
+          <li>Install environment.yml: <pre>conda env create -f environment.yml</pre></li>
+          <li>Close the terminal window</li>
+        </ol>
+      </article>
+    </div>
+  </div>
+For more information, refer to <a href="http://docs.anaconda.com/anaconda/navigator/tutorials/manage-environments/">Managing environments</a> in the Anaconda documentation.
+</div>
+
+
 <div id="r"> {% comment %} Start of 'R' section. {% endcomment %}
   <h3>R</h3>
 
@@ -628,49 +667,39 @@ please preview your site before committing, and make sure to run
     statistical analysis. To interact with R, we use
     <a href="https://www.rstudio.com/">RStudio</a>.
   </p>
+  <p>To install R and rstudio, use <a href="#anaconda">Anaconda navigator</a> and
+  follow <a href="https://docs.anaconda.com/anaconda/navigator/tutorials/create-r-environment/">these instructions</a>
+  to create a conda <b>R</b> environment called <b>esm-r-analysis</b>.
+  </p>
 
-  <div>
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li role="presentation" class="active"><a data-os="windows" href="#rstats-windows" aria-controls="Windows" role="tab" data-toggle="tab">Windows</a></li>
-      <li role="presentation"><a data-os="macos" href="#rstats-macos" aria-controls="MacOS" role="tab" data-toggle="tab">MacOS</a></li>
-      <li role="presentation"><a data-os="linux" href="#rstats-linux" aria-controls="Linux" role="tab" data-toggle="tab">Linux</a></li>
-    </ul>
-
-    <div class="tab-content">
-      <article role="tabpanel" class="tab-pane active" id="rstats-windows">
-        <a href="https://www.youtube.com/watch?v=q0PjTAylwoU">Video Tutorial</a>
-        <p>
-          Install R by downloading and running
-          <a href="https://cran.r-project.org/bin/windows/base/release.htm">this .exe file</a>
-          from <a href="https://cran.r-project.org/index.html">CRAN</a>.
-          Also, please install the
-          <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio IDE</a>.
-          Note that if you have separate user and admin accounts, you should run the 
-          installers as administrator (right-click on .exe file and select "Run as 
-          administrator" instead of double-clicking). Otherwise problems may occur later, 
-          for example when installing R packages.
-        </p>
-      </article>
-      <article role="tabpanel" class="tab-pane active" id="rstats-macos">
-        <a href="https://www.youtube.com/watch?v=5-ly3kyxwEg">Video Tutorial</a>
-        <p>
-          Install R by downloading and running
-          <a href="https://cran.r-project.org/bin/macosx/R-latest.pkg">this .pkg file</a>
-          from <a href="https://cran.r-project.org/index.html">CRAN</a>.
-          Also, please install the
-          <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio IDE</a>.
-        </p>
-      </article>
-      <article role="tabpanel" class="tab-pane active" id="rstats-linux">
-        <p>
-          You can download the binary files for your distribution
-          from <a href="https://cran.r-project.org/index.html">CRAN</a>. Or
-          you can use your package manager (e.g. for Debian/Ubuntu
-          run <code>sudo apt-get install r-base</code> and for Fedora run
-          <code>sudo dnf install R</code>).  Also, please install the
-          <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio IDE</a>.
-        </p>
-      </article>
-    </div>
-  </div>
 </div> {% comment %} End of 'R' section. {% endcomment %}
+
+<div id="r-libraries"> {% comment %} Start of 'R' section. {% endcomment %}
+  <h3>Install additional R libraries</h3>
+
+The following <pre>R</pre> packages are used in the lessons.
+
+<ul>
+<li><a href="https://cran.r-project.org/package=dplyr">dplyr</a></li>
+<li><a href="https://cran.r-project.org/package=ggplot2">ggplot2</a></li>
+<li><a href="https://cran.r-project.org/package=raster">raster</a></li>
+<li><a href="https://cran.r-project.org/package=rgdal">rgdal</a></li>
+<li><a href="https://cran.r-project.org/package=rasterVis">rasterVis</a></li>
+<li><a href="https://cran.r-project.org/package=remotes">remotes</a></li>
+<li><a href="https://cran.r-project.org/package=sf">sf</a></li>
+<li><a href="https://cran.r-project.org/package=ncdf4">ncdf4</a></li>
+<li><a href="https://cran.r-project.org/package=tmap">tmap</a></li>
+<li><a href="https://cran.r-project.org/package=mapview">mapview</a></li>
+<li><a href="https://cran.r-project.org/package=maps">maps</a></li>
+<li><a href="https://cran.r-project.org/package=plotly">plotly</a></li>
+<li><a href="https://cran.r-project.org/package=leaflet">leaflet</a></li>
+<li><a href="https://cran.r-project.org/web/packages/ecmwfr/">ecmwfr</a></li>
+</ul>
+
+  Start RStudio with Anaconda Navigator and the newly created R environment. Then install the following packages:
+
+  <pre>
+  install.packages(c("installr","dplyr", "ggplot2", "raster", "rgdal", "rasterVis", "sf", "ncdf4", "tmap", "mapview", "maps", "plotly", "leaflet", "ecmwfr"))
+  </pre>
+
+</div>
